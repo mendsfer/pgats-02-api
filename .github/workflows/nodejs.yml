@@ -25,7 +25,7 @@ jobs:
     - name: Rodar os testes de API via Controller
       run: npm run test-controller
 
-    - name: Subir a API 
+    - name: Subir a API Rest
       run: npm start &
 
     - name: Esperar a API estar Funcionando
@@ -33,3 +33,12 @@ jobs:
 
     - name: Rodar os testes de API via HTTP
       run: npm run test-external
+
+    - name: Subir a API GRAPHQL
+      run: npm run start-graphql &
+
+    - name: Esperar a API GRAPHQL estar funcionando
+      run: sleep 5
+
+    - name: Rodar os testes de API GRAPHQL via HTTP
+      run: npm run test-graphql
