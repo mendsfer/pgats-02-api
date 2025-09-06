@@ -4,7 +4,7 @@ const { expect, use } = require('chai');
 const chaiExclude = require('chai-exclude');
 use(chaiExclude);
 
-describe.only('Testes de Transferência', () => {
+describe('Testes de Transferência', () => {
 
     before(async () => {
         const loginUser = require('../fixture/requisicoes/login/loginUser.json');
