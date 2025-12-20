@@ -10,7 +10,10 @@
     "test-graphql-external": "mocha test/graphql/external/**/*.test.js --timeout 10000 --reporter mochawesome",
     "test-graphql-controller": "mocha test/graphql/controller/**/*.test.js --timeout 10000 --reporter mochawesome",
     "start": "node server.js",
-    "start-graphql": "node graphql/server.js"
+    "start-graphql": "node graphql/server.js",
+    "k6:run": "k6 run --out json=test/k6/results.json --out csv=test/k6/results.csv test/k6/performance.js",
+    "k6:report": "node test/k6/generateReport.js",
+    "k6:test": "npm run k6:run && npm run k6:report"
   },
   "keywords": [],
   "author": "",
@@ -18,12 +21,13 @@
   "type": "commonjs",
   "dependencies": {
     "apollo-server-express": "^3.13.0",
-    "bcryptjs": "^3.0.2",
-    "express": "^4.21.2",
+    "bcryptjs": "^3.0.3",
+    "express": "^4.22.1",
     "graphql": "^16.11.0",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
     "chai": "4.5.0",
     "chai-exclude": "^2.1.1",
     "dotenv": "^17.2.2",

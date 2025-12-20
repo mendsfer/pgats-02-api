@@ -7,6 +7,7 @@ Esta API permite o registro, login, consulta de usuários e transferências de v
 - Express
 - Swagger (documentação)
 - Banco de dados em memória (variáveis)
+- K6
 
 ## Instalação
 
@@ -79,3 +80,45 @@ Rode `npm run start-graphql` para executar a API do GraphQL e acesse a URL http:
 ---
 
 Para dúvidas, consulte a documentação Swagger, GraphQL Playground ou o código-fonte.
+
+
+## Testes de Performance
+- Foi utilizado o login a partir do helpers (arquivo login.js) e está usando o Check para validar o retorno esperado, os testes estão separados pelo conceito de Groups 
+
+    group('Login para obter o token', () => {
+        loginRes = login();
+        check(loginRes, {
+            'status deve ser igual a 200': (r) => r.status === 200,
+        });
+    });
+
+- Para realizar uma transferência estamos utilizando o token obtido no login
+
+- Implementado Stages, ramp-up: sobe até 2 usuários em 15 segundos, o stay mantém 3 usuários por 30 segundos e o ramp-down irá reduzir para 0 usuários em 15 segundos
+
+  stages: [
+    { duration: '15s', target: 2 }, // ramp-up subir para 2 usuários em 15 segundos
+    { duration: '30s', target: 3 }, // stay em 3 usuários por 30 segundos
+    { duration: '15s', target: 0 }, // ramp-down descer para 0 usuários em 15 segundos
+  ],
+
+- Implementado Thresholds, 85% dos testes deve ser menor do que 3 segundos e a taxa de falha deve ser menor que 40%
+
+  thresholds: {
+    http_req_duration: ['p(85) < 3000'], // 85% deve ser menor que 3000ms
+    http_req_failed: ['rate<0.4'], // taxa de falha deve ser menor que 50%
+  }
+};
+
+- Utilizado Trends (métricas personalizadas) no post/transfer para coletar o tempo de duração de cada requisição
+realizado a importação import { Trend } from 'k6/metrics'; e implementado postTransferDurationTrend.add(res.timings.duration);
+
+- Utilizado Faker para gerar um destinatário inválido para falhar a transferência 
+
+  const faker = new Faker();
+  const toInvalido = faker.person.firstName();
+
+  implementado no destinatário 
+
+  to: toInvalido,
+
