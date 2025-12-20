@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Relatório k6 — automático</title>
+  <style>body{font-family:Arial,Helvetica,sans-serif;margin:20px;color:#222}h1,h2{color:#006}table{border-collapse:collapse;width:100%;max-width:1100px}th,td{border:1px solid #ddd;padding:8px;text-align:left}th{background:#f4f4f4}.small{font-size:0.9em;color:#666}</style>
+</head>
+<body>
+  <h1>Relatório k6 — automático</h1>
+  <p class="small">Arquivo de entrada: result.json</p>
+  <h2>Resumo</h2>
+  <table>
+    <tr><th>Métrica</th><th>Valor</th></tr>
+    <tr><td>Total de requisições (http_reqs)</td><td>306</td></tr>
+    <tr><td>Taxa de falha (http_req_failed)</td><td>33.33 %</td></tr>
+    <tr><td>p(85) http_req_duration (ms)</td><td>32.99</td></tr>
+  </table>
+
+  <h2>Duração das transferências (transfer_duration)</h2>
+  <table>
+    <tr><th>Métrica</th><th>Valor (ms)</th></tr>
+    <tr><td>Média</td><td>2.6367</td></tr>
+    <tr><td>Mínimo</td><td>0.0000</td></tr>
+    <tr><td>Mediana</td><td>1.1579</td></tr>
+    <tr><td>Máximo</td><td>36.6055</td></tr>
+    <tr><td>p(90)</td><td>1.9979</td></tr>
+    <tr><td>p(95)</td><td>3.0104</td></tr>
+  </table>
+
+  <h2>Checks</h2>
+  <table>
+    <tr><th>Check</th><th>Passed</th><th>Total</th><th>Rate</th></tr>
+    <tr><td>status deve ser igual a 200</td><td>102</td><td>102</td><td>100.00%</td></tr>
+<tr><td>Transferência concluída com status 201</td><td>102</td><td>102</td><td>100.00%</td></tr>
+<tr><td>Transferência para usuário inválido retorna 400</td><td>102</td><td>102</td><td>100.00%</td></tr>
+  </table>
+
+  <p class="small">Gerado automaticamente.</p>
+</body>
+</html>
