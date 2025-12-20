@@ -122,3 +122,21 @@ realizado a importação import { Trend } from 'k6/metrics'; e implementado post
 
   to: toInvalido,
 
+- Relatórios HMTL é o arquivo report_auto.html
+
+- Execução dos testes 
+
+Com URL local (http://localhost:3000)
+k6 run test/k6/performance.js
+
+Com URL customizada via variável de ambiente
+k6 run --env BASE_URL=http://192.168.0.83:3000 test/k6/performance.js
+
+Com saída em JSON e CSV (para geração de relatório)
+npm run k6:run
+
+Executar teste e gerar relatório HTML automaticamente
+npm run k6:test
+
+Relatório gráfico em HTML
+K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=html-report.html K6_WEB_DASHBOARD_PERIOD=5ms k6 run ./test/k6/performance.js
